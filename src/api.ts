@@ -2,8 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import type { AccountId, Classification, Snapshot, TransactionId } from "./domain/types";
 import type { Plan } from "./model";
 
+export const isDemo = import.meta.env.MODE === "demo";
+
 async function call(path: string, init?: RequestInit) {
-  const res = await fetch(path, { ...init, headers: { "content-type": "application/json" } });
+  const res = isDemo
+    ? (await import("./demo")).demoRequest(path, init)
+    : await fetch(path, { ...init, headers: { "content-type": "application/json" } });
   if (!res.ok) {
     const body: unknown = await res.json().catch(() => null);
     const message =

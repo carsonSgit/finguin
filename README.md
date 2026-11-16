@@ -22,6 +22,20 @@ Open http://127.0.0.1:5186. Vite proxies `/api` to the Bun server on port 5187. 
 
 Startup creates an empty `data/finguin.db`. Tests use synthetic data.
 
+## Hosted demo
+
+```sh
+bun install --frozen-lockfile
+bun run build:demo
+bun run preview:demo
+```
+
+Preview at http://127.0.0.1:5188. Publish only `dist/demo/` on a static host at its domain root.
+
+The demo generates 12 months of fictional activity across four accounts. Visitors can edit categories, allocations, and plans in their own tab.
+
+Refreshing resets edits. CSV imports are blocked. The demo uses no API, SQLite file, or credentials; your personal app still starts empty.
+
 ## Import your accounts
 
 Use **Import CSV** in the app, or run:
@@ -35,7 +49,7 @@ bun run import /path/to/chequing-activities.csv /path/to/account-activities.csv
 | Chequing activity | Purchases, deposits, e-transfers, bill payments, internal transfers |
 | Account activities | TFSA, FHSA, RRSP contributions, trades, dividends, interest, tax |
 
-Re-importing an overlapping export skips existing rows. Manual category changes survive re-imports. The importer skips pending rows and reports invalid rows.
+Re-importing an overlapping export skips existing rows. Manual category changes survive re-imports.
 
 Open transactions to review categories. Direct deposits initially count as transfers; mark paycheques as Salary.
 
@@ -64,8 +78,6 @@ Stop both servers before copying SQLite files. Copy the entire `data/` directory
 
 To restore, stop the servers, move the current directory aside, copy your saved directory back to `data/`, then restart. Keep the original CSVs separately.
 
-Git does not back up your financial data. Finguin does not schedule backups.
-
 ## Settings
 
 Bun loads `.env` automatically. Copy `.env.example` if you need overrides.
@@ -90,13 +102,11 @@ flowchart LR
   API --> Browser
 ```
 
-`src/domain/` computes cash flow, transfer links, recurring payments, holdings, and savings projections. `src/import/` parses exports; `server/db.ts` owns storage and import deduplication.
-
 ## Limits
 
 Balances depend on export coverage. Accounts starting mid-history can show partial balances. Holdings use the last traded price in the export, without live quotes.
 
-Transfer matching and recurring detection use heuristics. Forecasts and contribution estimates depend on imported history; verify them against your records.
+Transfer matching, recurring detection, and forecasts use heuristics; verify them against your records.
 
 ## Checks
 
@@ -110,8 +120,6 @@ bun run check:privacy --history
 
 `bun run build` produces frontend files in `dist/`. Run locally through the development command; the API does not serve the production bundle.
 
-## Assets and history
+## Assets
 
 Merchant logos come from [Simple Icons](https://simpleicons.org) (CC0). Category artwork comes from [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji) (MIT). Charts live in `vendor/bklit`, with their license.
-
-The initial commits group the existing implementation by module. They reconstruct work performed before Git initialization and use their actual commit dates.

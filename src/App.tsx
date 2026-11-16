@@ -1,6 +1,6 @@
 import { Bars3Icon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-import { useSnapshot } from "./api";
+import { isDemo, useSnapshot } from "./api";
 import { AccountsContext } from "./components/accounts-context";
 import { ImportDialog } from "./components/ImportDialog";
 import { type Page, Sidebar } from "./components/Sidebar";
@@ -36,6 +36,10 @@ export function App() {
     setAccount(null);
     setMenu(false);
   }
+  function openImport() {
+    if (isDemo) setError("CSV import is available in the local app. This demo uses fictional data.");
+    else setImporting(true);
+  }
   function content(snapshot: Snapshot) {
     switch (page) {
       case "Dashboard":
@@ -51,7 +55,7 @@ export function App() {
       case "Home goal":
         return <HomeGoal snapshot={snapshot} mutate={mutate} />;
       case "Your data":
-        return <Data snapshot={snapshot} onImport={() => setImporting(true)} />;
+        return <Data snapshot={snapshot} onImport={openImport} />;
       default: {
         const exhaustive: never = page;
         return exhaustive;
@@ -81,10 +85,15 @@ export function App() {
             navigate("Accounts");
             setAccount(id);
           }}
-          onImport={() => setImporting(true)}
+          onImport={openImport}
           onClose={() => setMenu(false)}
         />
         <main className="main">
+          {isDemo && (
+            <div className="banner" role="status">
+              <span>Demo · Fictional data. Changes stay in this tab; refresh to reset.</span>
+            </div>
+          )}
           <button
             type="button"
             className="icon-button mobile-only menu-button"
@@ -105,7 +114,7 @@ export function App() {
           {snapshot.transactions.length ? (
             content(snapshot)
           ) : (
-            <Data snapshot={snapshot} onImport={() => setImporting(true)} />
+            <Data snapshot={snapshot} onImport={openImport} />
           )}
         </main>
         {importing && (
