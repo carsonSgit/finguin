@@ -7,11 +7,21 @@ function git(...args: string[]) {
 }
 
 const roots = new Set([
-  ".gitignore", ".env.example", "README.md", "LICENSE", "package.json", "bun.lock",
-  "biome.json", "components.json", "tsconfig.json", "vite.config.ts", "index.html",
+  ".gitignore",
+  ".env.example",
+  "README.md",
+  "LICENSE",
+  "package.json",
+  "bun.lock",
+  "biome.json",
+  "components.json",
+  "tsconfig.json",
+  "vite.config.ts",
+  "index.html",
   "vendor/bklit/src/charts/patterns/LICENSE-visx-pattern",
 ]);
-const secret = /-----BEGIN (?:\w+ )*PRIVATE KEY-----|\bsk-(?:or-v1-)?[a-zA-Z0-9_-]{20,}|\b(?:ghp|glpat|github_pat)[_-][a-zA-Z0-9_-]{20,}|(?:API_KEY|SECRET|PASSWORD|TOKEN)\s*[=:]\s*["']?[a-zA-Z0-9_/-]{20,}/;
+const secret =
+  /-----BEGIN (?:\w+ )*PRIVATE KEY-----|\bsk-(?:or-v1-)?[a-zA-Z0-9_-]{20,}|\b(?:ghp|glpat|github_pat)[_-][a-zA-Z0-9_-]{20,}|(?:API_KEY|SECRET|PASSWORD|TOKEN)\s*[=:]\s*["']?[a-zA-Z0-9_/-]{20,}/;
 const checked = new Set<string>();
 let failures = 0;
 function check(mode: string, oid: string, path: string) {
@@ -20,16 +30,23 @@ function check(mode: string, oid: string, path: string) {
   checked.add(key);
   const parts = path.split("/");
   const name = posix.basename(path);
-  const allowed = roots.has(path) ||
+  const allowed =
+    roots.has(path) ||
     /^(src|server|scripts|tests)\/.+\.(ts|tsx|css)$/.test(path) ||
     /^public\/emoji\/[a-z-]+\.png$/.test(path) ||
     /^\.githooks\/(pre-commit|pre-push)$/.test(path) ||
     /^vendor\/bklit\/(src\/.+\.(ts|tsx)|README\.md|LICENSE|package\.json|tsconfig\.json)$/.test(path);
-  const forbidden = parts.some((p) => /^(data|imports|exports|backups|logs|node_modules|dist)$/.test(p)) ||
+  const forbidden =
+    parts.some((p) => /^(data|imports|exports|backups|logs|node_modules|dist)$/.test(p)) ||
     (name.startsWith(".env") && path !== ".env.example");
   const content = git("cat-file", "blob", oid);
-  if (!allowed || forbidden || !["100644", "100755"].includes(mode) ||
-      content.startsWith("SQLite format 3") || secret.test(content)) {
+  if (
+    !allowed ||
+    forbidden ||
+    !["100644", "100755"].includes(mode) ||
+    content.startsWith("SQLite format 3") ||
+    secret.test(content)
+  ) {
     console.error(`Privacy check rejected: ${path}`);
     failures++;
   }

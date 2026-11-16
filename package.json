@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun run build:charts && bun scripts/dev.ts",
     "build": "bun run build:charts && tsc --noEmit && vite build",
-    "typecheck": "tsc -p vendor/bklit/tsconfig.json --noEmit && tsc --noEmit",
+    "typecheck": "bun run build:charts && tsc --noEmit",
     "check": "biome check .",
     "test": "bun test",
     "build:charts": "tsc -p vendor/bklit/tsconfig.json",
