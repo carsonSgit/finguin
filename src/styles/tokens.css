@@ -1,0 +1,48 @@
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --bg-muted: #f4f4f5;
+  --bg-hover: #f4f4f5;
+  --bg-selected: #eef4ff;
+  --ink: #18181b;
+  --ink-2: #3f3f46;
+  --muted: #8a8a93;
+  --line: #ececee;
+  --line-strong: #d4d4d8;
+  --accent: #2563eb;
+  --accent-soft: #e8efff;
+  --positive: #16a34a;
+  --positive-soft: #e9f8ef;
+  --negative: #dc2626;
+  --negative-soft: #fdecec;
+  --warning: #b45309;
+  --warning-soft: #fff4e5;
+  --tone-orange: #f59e0b;
+  --tone-blue: #3b82f6;
+  --tone-green: #22c55e;
+  --tone-violet: #8b5cf6;
+  --tone-teal: #14b8a6;
+  --radius: 8px;
+  --radius-card: 14px;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 4%), 0 0 0 1px var(--line);
+  --sidebar: 236px;
+  --detail: 380px;
+  --header: 56px;
+
+  --chart-background: var(--bg);
+  --chart-foreground: var(--ink);
+  --chart-foreground-muted: var(--muted);
+  --chart-label: var(--muted);
+  --chart-line-primary: var(--positive);
+  --chart-grid: var(--line);
+  --chart-crosshair: var(--line-strong);
+  --chart-tooltip-background: var(--bg);
+  --chart-tooltip-foreground: var(--ink);
+  --chart-tooltip-muted: var(--muted);
+  --popover: var(--bg);
+  --popover-foreground: var(--ink);
+  --muted-foreground: var(--muted);
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --border: var(--line);
+}

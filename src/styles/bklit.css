@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@source "../../vendor/bklit/src";
+@theme inline {
+  --color-chart-label: var(--chart-label);
+  --color-chart-tooltip-background: var(--chart-tooltip-background);
+  --color-chart-tooltip-foreground: var(--chart-tooltip-foreground);
+  --color-chart-tooltip-muted: var(--chart-tooltip-muted);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+}
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+}

@@ -1,0 +1,229 @@
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar) minmax(0, 1fr);
+  height: 100dvh;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: var(--bg-subtle);
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+}
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  margin-bottom: 12px;
+  padding: 0 8px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.nav-item,
+.sidebar-account {
+  width: 100%;
+  height: 34px;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 500;
+  font-size: 14px;
+}
+.nav-item svg {
+  color: var(--muted);
+}
+.nav-item:hover,
+.sidebar-account:hover {
+  background: var(--bg-hover);
+}
+.nav-item[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.nav-item[aria-current="page"] svg {
+  color: var(--accent);
+}
+.sidebar-accounts {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+}
+.sidebar-label {
+  padding: 0 10px 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.sidebar-account {
+  font-weight: 400;
+}
+.sidebar-account .truncate {
+  flex: 1;
+  text-align: left;
+}
+.sidebar-account .muted {
+  font-size: 13px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 2px;
+}
+.sidebar-bottom .tabs {
+  margin-top: 8px;
+}
+.main {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 24px;
+  background: var(--positive-soft);
+  color: var(--positive);
+  font-size: 13px;
+}
+.banner.is-error {
+  background: var(--negative-soft);
+  color: var(--negative);
+}
+.screen {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.screen.has-detail {
+  grid-template-columns: minmax(0, 1fr) var(--detail);
+}
+.screen-main,
+.detail {
+  min-height: 0;
+  overflow-y: auto;
+}
+.screen-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: var(--header);
+  padding: 0 24px;
+  background: rgb(255 255 255 / 92%);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.screen-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.screen-body {
+  display: grid;
+  gap: 16px;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.detail {
+  border-left: 1px solid var(--line);
+  background: var(--bg);
+}
+.detail .screen-header {
+  padding: 0 16px 0 24px;
+}
+.detail-body {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.has-detail .grid-2 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 1100px) {
+  .screen.has-detail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .detail {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(var(--detail), 100vw);
+    z-index: 20;
+    box-shadow: -12px 0 32px rgb(0 0 0 / 10%);
+  }
+}
+@media (max-width: 780px) {
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mobile-only {
+    display: inline-flex;
+  }
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(280px, 85vw);
+    z-index: 30;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+  .sidebar.is-open {
+    transform: none;
+    box-shadow: 12px 0 32px rgb(0 0 0 / 12%);
+  }
+  .menu-button {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    z-index: 5;
+  }
+  .screen-header {
+    padding-left: 48px;
+    padding-right: 16px;
+  }
+  .detail .screen-header {
+    padding-left: 16px;
+  }
+  .screen-body {
+    padding: 16px;
+  }
+  .grid-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
