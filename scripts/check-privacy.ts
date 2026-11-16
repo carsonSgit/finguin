@@ -9,6 +9,7 @@ function git(...args: string[]) {
 const roots = new Set([
   ".gitignore", ".env.example", "README.md", "LICENSE", "package.json", "bun.lock",
   "biome.json", "components.json", "tsconfig.json", "vite.config.ts", "index.html",
+  "vendor/bklit/src/charts/patterns/LICENSE-visx-pattern",
 ]);
 const secret = /-----BEGIN (?:\w+ )*PRIVATE KEY-----|\bsk-(?:or-v1-)?[a-zA-Z0-9_-]{20,}|\b(?:ghp|glpat|github_pat)[_-][a-zA-Z0-9_-]{20,}|(?:API_KEY|SECRET|PASSWORD|TOKEN)\s*[=:]\s*["']?[a-zA-Z0-9_/-]{20,}/;
 const checked = new Set<string>();
