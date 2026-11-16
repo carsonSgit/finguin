@@ -7,6 +7,7 @@ function git(...args: string[]) {
 }
 
 const roots = new Set([
+  ".github/workflows/demo.yml",
   "public/emoji/LICENSE",
   ".gitignore",
   ".env.example",

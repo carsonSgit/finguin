@@ -36,7 +36,15 @@ const accountAsset: Record<AccountType, string> = {
 };
 
 export function Emoji({ name, size = 20 }: { readonly name: string; readonly size?: number }) {
-  return <img className="emoji" src={`/emoji/${name}.png`} alt="" width={size} height={size} />;
+  return (
+    <img
+      className="emoji"
+      src={`${import.meta.env.BASE_URL}emoji/${name}.png`}
+      alt=""
+      width={size}
+      height={size}
+    />
+  );
 }
 
 export function Amount({

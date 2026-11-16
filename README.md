@@ -1,6 +1,6 @@
 # Finguin
 
-A local personal finance dashboard for Wealthsimple CSV exports. Import your accounts, review spending, track recurring payments, and plan a first home purchase.
+A local finance dashboard for Wealthsimple exports. Import your accounts, review spending, track recurring payments, and plan a first home purchase.
 
 - Dashboard with cash flow, spending categories, and net worth.
 - Transactions with search, month filters, merchant grouping, and manual categories.
@@ -24,13 +24,15 @@ Startup creates an empty `data/finguin.db`. Tests use synthetic data.
 
 ## Hosted demo
 
+[Open the fictional-data demo](https://carsonsgit.github.io/finguin/).
+
 ```sh
 bun install --frozen-lockfile
 bun run build:demo
 bun run preview:demo
 ```
 
-Preview at http://127.0.0.1:5188. Publish only `dist/demo/` on a static host at its domain root.
+Preview at http://127.0.0.1:5188. Pushes to `main` run checks and deploy only `dist/demo/` to GitHub Pages.
 
 The demo generates 12 months of fictional activity across four accounts. Visitors can edit categories, allocations, and plans in their own tab.
 
