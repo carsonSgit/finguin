@@ -112,6 +112,6 @@ bun run check:privacy --history
 
 ## Assets and history
 
-Merchant logos come from Simple Icons (CC0). Category artwork comes from Microsoft Fluent Emoji (MIT). Charts live in `vendor/bklit`, with their license.
+Merchant logos come from [Simple Icons](https://simpleicons.org) (CC0). Category artwork comes from [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji) (MIT). Charts live in `vendor/bklit`, with their license.
 
 The initial commits group the existing implementation by module. They reconstruct work performed before Git initialization and use their actual commit dates.
